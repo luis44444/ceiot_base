@@ -41,10 +41,29 @@ app.use(express.static('spa/static'));
 
 const PORT = 8080;
 
-app.post('/measurement', function (req, res) {
--       console.log("device id    : " + req.body.id + " key         : " + req.body.key + " temperature : " + req.body.t + " humidity    : " + req.body.h);	
-    const {insertedId} = insertMeasurement({id:req.body.id, t:req.body.t, h:req.body.h});
-	res.send("received measurement into " +  insertedId);
+app.post('/measurement', async (req, res) => {
+    try {
+        const measurement = {
+            id: req.body.id,
+            t: req.body.t
+        };
+
+        if (req.body.h !== undefined) {
+            measurement.h = req.body.h;
+        }
+
+        if (req.body.p !== undefined) {
+            measurement.p = req.body.p;
+        }
+
+        const insertedId = await insertMeasurement(measurement);
+
+        res.send("received measurement into " + insertedId);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error al guardar medición");
+    }
 });
 
 app.post('/device', function (req, res) {
