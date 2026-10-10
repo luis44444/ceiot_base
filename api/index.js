@@ -43,6 +43,11 @@ const PORT = 8080;
 
 app.post('/measurement', async (req, res) => {
     try {
+
+        // DEBUG: Mostrar los datos recibidos del ESP32////////////////////////////////////////////////
+        console.log("Datos recibidos del ESP32:", req.body);
+        // DEBUG: Mostrar los datos recibidos del ESP32////////////////////////////////////////////////
+
         const measurement = {
             id: req.body.id,
             t: req.body.t

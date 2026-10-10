@@ -23,7 +23,7 @@
 #define WIFI_SSID       ""
 #define WIFI_PASSWORD   ""
 
-#define SERVER_URL      "http://192.168.1.101:8080/measurement"
+#define SERVER_URL      "http://192.168.1.104:8080/measurement"
 
 #define DEVICE_ID "01"
 
